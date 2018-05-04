@@ -1,0 +1,34 @@
+{
+    "repos": [
+        {
+            "name": "jmajoor/iis-aspnetcore",
+            "readmePath": "README.md",
+            "images": [
+                {
+                    "sharedTags": {
+                        "2.0.7-hosting": {},
+                        "2.0-hosting": {}
+                    },
+                    "platforms": [
+                        {
+                            "dockerfile": "windowsservercore-ltsc2016/4.7.1/2.0",
+                            "os": "windows",
+                            "tags": {
+                                "4.7.1-2.0.7-windowsservercore-ltsc2016": {},
+                                "4.7.1-2.0-windowsservercore-ltsc2016": {}
+                            }
+                        },
+                        {
+                            "dockerfile": "windowsservercore-ltsc2016/4.7.2/2.0",
+                            "os": "windows",
+                            "tags": {
+                                "4.7.2-2.0.7-windowsservercore-ltsc2016": {},
+                                "4.7.2-2.0-windowsservercore-ltsc2016": {}
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

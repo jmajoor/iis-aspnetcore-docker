@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/aspnet:4.7.1-windowsservercore-ltsc2016
+FROM microsoft/aspnet:4.7.2-windowsservercore-ltsc2016
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 # tags: 4.7.1-2.0.7-windowsservercore-ltsc2016
