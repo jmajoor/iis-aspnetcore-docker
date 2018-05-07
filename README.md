@@ -8,7 +8,7 @@ This image can be used just like [`microsoft/aspnet`](https://hub.docker.com/r/m
 
 ## Docker image
 
-Try out this image here: 
+Try out this image here: [`jmajoor/iis-aspnetcore`](https://hub.docker.com/r/jmajoor/iis-aspnetcore/)
 
 ## More information
 - [`microsoft/aspnet`](https://hub.docker.com/r/microsoft/aspnet/)
