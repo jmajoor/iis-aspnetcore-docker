@@ -7,7 +7,8 @@ param(
     [string]$OSFilter,
     [switch]$CleanupDocker,
     [switch]$Keep,
-    [switch]$Push
+    [switch]$Push,
+    $RepositoryName
 )
 
 Set-StrictMode -Version Latest
@@ -39,6 +40,22 @@ function Invoke-CleanupDocker($ActiveOS)
 $(docker version) | % { Write-Host "$_" }
 $activeOS = docker version -f "{{ .Server.Os }}"
 Invoke-CleanupDocker $activeOS
+$osBuild = (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\').BuildLabEx
+$buildOSVersion = "1803"
+switch -regex ($osbuild) {
+	"^14393.*" {
+        $buildOSVersion = "ltsc2016"
+	}
+	"^16299.*" {
+        $buildOSVersion = "1709"
+	}
+	"^17134." {
+        $buildOSVersion = "1803"
+	}
+	default {
+        $buildOSVersion = "1803"
+	}
+}
 
 if ($UseImageCache) {
     $optionalDockerBuildArgs = ""
@@ -61,6 +78,10 @@ if (-not [string]::IsNullOrEmpty($OsFilter))
     $buildFilter = "$buildFilter/$OsFilter/*"
 }
 
+if ($RepositoryName -ne $null) {
+    $manifestRepo.Name = "$RepositoryName"
+}
+
 try {
     $manifestRepo.Images |
     ForEach-Object {
@@ -78,6 +99,10 @@ try {
                 }
                 $qualifiedTags = $tags | ForEach-Object { $manifestRepo.Name + ':' + $_.Name}
                 $formattedTags = $qualifiedTags -join ', '
+                if ($_.osVersion -ne $buildOSVersion) {
+                    $optionalDockerBuildArgs += " --isolation=hyperv"
+                    Write-Host "--- Building with hyperv isolation"
+                }
                 Write-Host "--- Building $formattedTags from $dockerfilePath ---"
                 Invoke-Expression "docker build $optionalDockerBuildArgs --pull -t $($qualifiedTags -join ' -t ') $dockerfilePath"
                 if ($LastExitCode -ne 0) {

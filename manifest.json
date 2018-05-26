@@ -13,6 +13,7 @@
                         {
                             "dockerfile": "windowsservercore-ltsc2016/4.7.1/2.0",
                             "os": "windows",
+							"osVersion": "ltsc2016",
                             "tags": {
                                 "4.7.1-2.0.7-windowsservercore-ltsc2016": {},
                                 "4.7.1-2.0-windowsservercore-ltsc2016": {}
@@ -21,9 +22,37 @@
                         {
                             "dockerfile": "windowsservercore-ltsc2016/4.7.2/2.0",
                             "os": "windows",
+							"osVersion": "ltsc2016",
                             "tags": {
                                 "4.7.2-2.0.7-windowsservercore-ltsc2016": {},
                                 "4.7.2-2.0-windowsservercore-ltsc2016": {}
+                            }
+                        },
+						{
+                            "dockerfile": "windowsservercore-1709/4.7.1/2.0",
+                            "os": "windows",
+							"osVersion": "1709",
+                            "tags": {
+                                "4.7.1-2.0.7-windowsservercore-1709": {},
+                                "4.7.1-2.0-windowsservercore-1709": {}
+                            }
+                        },
+                        {
+                            "dockerfile": "windowsservercore-1709/4.7.2/2.0",
+                            "os": "windows",
+							"osVersion": "1709",
+                            "tags": {
+                                "4.7.2-2.0.7-windowsservercore-1709": {},
+                                "4.7.2-2.0-windowsservercore-1709": {}
+                            }
+                        },
+                        {
+                            "dockerfile": "windowsservercore-1803/4.7.2/2.0",
+                            "os": "windows",
+							"osVersion": "1803",
+                            "tags": {
+                                "4.7.2-2.0.7-windowsservercore-1803": {},
+                                "4.7.2-2.0-windowsservercore-1803": {}
                             }
                         }
                     ]
