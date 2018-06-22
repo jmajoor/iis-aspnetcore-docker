@@ -68,14 +68,14 @@ $manifest = Get-Content "manifest.json" | ConvertFrom-Json
 $manifestRepo = $manifest.Repos[0]
 $builtTags = @()
 
-$buildFilter = "*"
-if (-not [string]::IsNullOrEmpty($versionFilter))
-{
-    $buildFilter = "$versionFilter/$buildFilter"
-}
+$buildFilter = ".*"
 if (-not [string]::IsNullOrEmpty($OsFilter))
 {
-    $buildFilter = "$buildFilter/$OsFilter/*"
+    $buildFilter = "$OsFilter"
+}
+if (-not [string]::IsNullOrEmpty($versionFilter))
+{
+    $buildFilter = "$buildFilter/$versionFilter"
 }
 
 if ($RepositoryName -ne $null) {
@@ -88,7 +88,7 @@ try {
         $images = $_
         $_.Platforms |
             Where-Object { $_.os -eq "$activeOS" } |
-            Where-Object { [string]::IsNullOrEmpty($buildFilter) -or $_.dockerfile -like "$buildFilter" } |
+            Where-Object { [string]::IsNullOrEmpty($buildFilter) -or $_.dockerfile -match "$buildFilter" } |
             Where-Object { ( [string]::IsNullOrEmpty($ArchitectureFilter) -and -not [bool]($_.PSobject.Properties.name -match "architecture"))`
                 -or ( [bool]($_.PSobject.Properties.name -match "architecture") -and $_.architecture -eq "$ArchitectureFilter" ) } |
             ForEach-Object {
@@ -99,12 +99,13 @@ try {
                 }
                 $qualifiedTags = $tags | ForEach-Object { $manifestRepo.Name + ':' + $_.Name}
                 $formattedTags = $qualifiedTags -join ', '
+				$buildArgs = $optionalDockerBuildArgs
                 if ($_.osVersion -ne $buildOSVersion) {
-                    $optionalDockerBuildArgs += " --isolation=hyperv"
+                    $buildArgs += " --isolation=hyperv"
                     Write-Host "--- Building with hyperv isolation"
                 }
                 Write-Host "--- Building $formattedTags from $dockerfilePath ---"
-                Invoke-Expression "docker build $optionalDockerBuildArgs --pull -t $($qualifiedTags -join ' -t ') $dockerfilePath"
+                Invoke-Expression "docker build $buildArgs --pull -t $($qualifiedTags -join ' -t ') $dockerfilePath"
                 if ($LastExitCode -ne 0) {
                     throw "Failed building $formattedTags"
                 }
