@@ -6,7 +6,7 @@
             "images": [
                 {
                     "sharedTags": {
-                        "2.0.8-hosting": {},
+                        "2.0.9-hosting": {},
                         "2.0-hosting": {}
                     },
                     "platforms": [
@@ -24,7 +24,7 @@
                             "os": "windows",
 							"osVersion": "1709",
                             "tags": {
-                                "4.7.2-2.0.8-windowsservercore-1709": {},
+                                "4.7.2-2.0.9-windowsservercore-1709": {},
                                 "4.7.2-2.0-windowsservercore-1709": {}
                             }
                         },
@@ -33,7 +33,7 @@
                             "os": "windows",
 							"osVersion": "1803",
                             "tags": {
-                                "4.7.2-2.0.8-windowsservercore-1803": {},
+                                "4.7.2-2.0.9-windowsservercore-1803": {},
                                 "4.7.2-2.0-windowsservercore-1803": {}
                             }
                         }
