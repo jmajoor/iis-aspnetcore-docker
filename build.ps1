@@ -41,7 +41,7 @@ $(docker version) | % { Write-Host "$_" }
 $activeOS = docker version -f "{{ .Server.Os }}"
 Invoke-CleanupDocker $activeOS
 $osBuild = (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\').BuildLabEx
-$buildOSVersion = "1803"
+$buildOSVersion = "1903"
 switch -regex ($osbuild) {
 	"^14393.*" {
         $buildOSVersion = "ltsc2016"
@@ -52,8 +52,15 @@ switch -regex ($osbuild) {
 	"^17134." {
         $buildOSVersion = "1803"
 	}
+	"^17763." {
+        $buildOSVersion = "ltsc2019"
+	}
+	"^18362." {
+        $buildOSVersion = "1903"
+	}
+	
 	default {
-        $buildOSVersion = "1803"
+        $buildOSVersion = "1903"
 	}
 }
 
@@ -80,6 +87,30 @@ if (-not [string]::IsNullOrEmpty($versionFilter))
 
 if ($RepositoryName -ne $null) {
     $manifestRepo.Name = "$RepositoryName"
+}
+
+if ($Push) {
+    $manifestRepo.Images |
+    ForEach-Object {
+        $_.Platforms |
+            Where-Object { $_.os -eq "$activeOS" } |
+            Where-Object { [string]::IsNullOrEmpty($buildFilter) -or $_.dockerfile -match "$buildFilter" } |
+            Where-Object { ( [string]::IsNullOrEmpty($ArchitectureFilter) -and -not [bool]($_.PSobject.Properties.name -match "architecture"))`
+                -or ( [bool]($_.PSobject.Properties.name -match "architecture") -and $_.architecture -eq "$ArchitectureFilter" ) } |
+            ForEach-Object {
+                $tags = [array]($_.Tags | ForEach-Object { $_.PSobject.Properties })
+                # No shared tags
+                # if ([bool]($images.PSobject.Properties.name -match "sharedtags")) {
+                #     $tags += [array]($images.sharedtags | ForEach-Object { $_.PSobject.Properties })
+                # }
+                $qualifiedTags = $tags | ForEach-Object { $manifestRepo.Name + ':' + $_.Name}
+                $qualifiedTags | ForEach-Object {
+                    Write-Host "--- Push $_ ---"
+                    Invoke-Expression "docker push $_"
+                }
+            }
+    }
+    return
 }
 
 try {
