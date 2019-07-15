@@ -24,6 +24,7 @@ function Invoke-CleanupDocker($ActiveOS)
             docker images |
                 Where-Object {
                     -Not ($_.StartsWith("mcr.microsoft.com/windows/nanoserver ")`
+                    -Or $_.StartsWith("mcr.microsoft.com/dotnet/core/aspnet ")`
                     -Or $_.StartsWith("mcr.microsoft.com/dotnet/framework/aspnet ")`
                     -Or $_.StartsWith("mcr.microsoft.com/windows/servercore ")`
                     -Or $_.StartsWith("REPOSITORY ")) } |
