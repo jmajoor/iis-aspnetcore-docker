@@ -23,9 +23,9 @@ function Invoke-CleanupDocker($ActiveOS)
             # Windows base images are large, preserve them to avoid the overhead of pulling each time.
             docker images |
                 Where-Object {
-                    -Not ($_.StartsWith("microsoft/nanoserver ")`
-                    -Or $_.StartsWith("microsoft/aspnet ")`
-                    -Or $_.StartsWith("microsoft/windowsservercore ")`
+                    -Not ($_.StartsWith("mcr.microsoft.com/windows/nanoserver ")`
+                    -Or $_.StartsWith("mcr.microsoft.com/dotnet/framework/aspnet ")`
+                    -Or $_.StartsWith("mcr.microsoft.com/windows/servercore ")`
                     -Or $_.StartsWith("REPOSITORY ")) } |
                 ForEach-Object { $_.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)[2] } |
                 Select-Object -Unique |
