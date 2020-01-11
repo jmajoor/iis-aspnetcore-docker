@@ -3,10 +3,10 @@ FROM microsoft/aspnet:4.7.2-windowsservercore-ltsc2016
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 # Install .NET Core
-ENV DOTNET_VERSION 2.1.14
-ENV DOTNET_DOWNLOAD_URL  https://download.visualstudio.microsoft.com/download/pr/d08902cf-87b0-4bfe-b25c-627ff77b8802/8293c56094f50ba8c4ed703aff95c325/dotnet-hosting-$DOTNET_VERSION-win.exe
+ENV DOTNET_VERSION 3.1.0
+ENV DOTNET_DOWNLOAD_URL  https://download.visualstudio.microsoft.com/download/pr/fa3f472e-f47f-4ef5-8242-d3438dd59b42/9b2d9d4eecb33fe98060fd2a2cb01dcd/dotnet-hosting-$DOTNET_VERSION-win.exe
 
-ENV DOTNET_DOWNLOAD_SHA 95bc0148f7569aff80515f0877cc0509343a9b754d07c8efb0925f1f21ee2ce530988afc2b2b5214b5cba346dbfb302a98d5ada79110f003707314da70f08f2e
+ENV DOTNET_DOWNLOAD_SHA f831fefd7315370e68b6743b4511435a1bbfd0945ac1957e16e22ccd7cd56c3fa0da083b66d6528039b1333ab0c8d72f00a05592b359b9ef7bc0cc9fca5872c1
 RUN Invoke-WebRequest $Env:DOTNET_DOWNLOAD_URL -OutFile WindowsHosting.exe; `
     if ((Get-FileHash WindowsHosting.exe -Algorithm sha512).Hash -ne $Env:DOTNET_DOWNLOAD_SHA) { `
         Write-Host 'CHECKSUM VERIFICATION FAILED!'; `
