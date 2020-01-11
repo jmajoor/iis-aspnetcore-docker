@@ -50,50 +50,6 @@
                 },
 				{
                     "sharedTags": {
-                        "2.2.8-hosting": {},
-                        "2.2-hosting": {}
-                    },
-                    "platforms": [
-                        {
-                            "dockerfile": "windowsservercore-ltsc2016/4.8/2.2",
-                            "os": "windows",
-							"osVersion": "ltsc2016",
-                            "tags": {
-                                "4.8-2.2.8-windowsservercore-ltsc2016": {},
-                                "4.8-2.2-windowsservercore-ltsc2016": {}
-                            }
-                        },
-                        {
-                            "dockerfile": "windowsservercore-1803/4.8/2.2",
-                            "os": "windows",
-							"osVersion": "1803",
-                            "tags": {
-                                "4.8-2.2.8-windowsservercore-1803": {},
-                                "4.8-2.2-windowsservercore-1803": {}
-                            }
-                        },
-                        {
-                            "dockerfile": "windowsservercore-ltsc2019/4.8/2.2",
-                            "os": "windows",
-							"osVersion": "ltsc2019",
-                            "tags": {
-                                "4.8-2.2.8-windowsservercore-ltsc2019": {},
-                                "4.8-2.2-windowsservercore-ltsc2019": {}
-                            }
-                        },
-                        {
-                            "dockerfile": "windowsservercore-1903/4.8/2.2",
-                            "os": "windows",
-							"osVersion": "1903",
-                            "tags": {
-                                "4.8-2.2.8-windowsservercore-1903": {},
-                                "4.8-2.2-windowsservercore-1903": {}
-                            }
-                        }
-                    ]
-                },
-				{
-                    "sharedTags": {
                         "3.1.0-hosting": {},
                         "3.1-hosting": {}
                     },
