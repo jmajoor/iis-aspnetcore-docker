@@ -3,10 +3,10 @@ FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 # Install .NET Core
-ENV DOTNET_VERSION 2.1.12
-ENV DOTNET_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/aspnetcore/Runtime/$DOTNET_VERSION/dotnet-hosting-$DOTNET_VERSION-win.exe
+ENV DOTNET_VERSION 2.1.17
+ENV DOTNET_DOWNLOAD_URL https://download.visualstudio.microsoft.com/download/pr/a431ea89-07d9-4533-9d72-fd246bd2efc7/5bbc08f02800c08b69bce56d03723f18/dotnet-hosting-$DOTNET_VERSION-win.exe
 
-ENV DOTNET_DOWNLOAD_SHA B80AD724CC0EAB7C63E1D0FBF62BDAA573BA2626F331AE92A7669E77308589ABF06A86E268640DCCCE39AB03446133075CD69188A5E3D701B4E51B187DEA22AC
+ENV DOTNET_DOWNLOAD_SHA f9b205f24f9264b1b65e7d32706320a07be87ac4fc8c4d41ea861dea5c95dbd676b3bfb245dd904c6650ebee907884914e871644692dee761e830d80595ee9ec
 
 RUN Invoke-WebRequest $Env:DOTNET_DOWNLOAD_URL -OutFile WindowsHosting.exe; `
     if ((Get-FileHash WindowsHosting.exe -Algorithm sha512).Hash -ne $Env:DOTNET_DOWNLOAD_SHA) { `
@@ -14,7 +14,6 @@ RUN Invoke-WebRequest $Env:DOTNET_DOWNLOAD_URL -OutFile WindowsHosting.exe; `
         exit 1; `
     }; `
     `
-    dir c:\Windows\Installer; `
     Start-Process "./WindowsHosting.exe" '/install /quiet /norestart' -Wait; `
     Remove-Item -Force -Recurse 'C:\ProgramData\Package Cache\*'; `
     Remove-Item -Force -Recurse C:\Windows\Installer\*; `
