@@ -3,10 +3,10 @@ FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 # Install .NET Core
-ENV DOTNET_VERSION 2.1.17
-ENV DOTNET_DOWNLOAD_URL https://download.visualstudio.microsoft.com/download/pr/a431ea89-07d9-4533-9d72-fd246bd2efc7/5bbc08f02800c08b69bce56d03723f18/dotnet-hosting-$DOTNET_VERSION-win.exe
+ENV DOTNET_VERSION 2.1.19
+ENV DOTNET_DOWNLOAD_URL https://download.visualstudio.microsoft.com/download/pr/988d236a-30bf-4e96-8063-665d27c922c9/b793025960eaf182d8f32e723ad9b47a/dotnet-hosting-2.1.19-win.exe
 
-ENV DOTNET_DOWNLOAD_SHA f9b205f24f9264b1b65e7d32706320a07be87ac4fc8c4d41ea861dea5c95dbd676b3bfb245dd904c6650ebee907884914e871644692dee761e830d80595ee9ec
+ENV DOTNET_DOWNLOAD_SHA 6bbba7eb796ad88a4c66568e45b9e2eb6873f0d591093d0b3c574a9c9dddc4af03eacbfb6d8495653aa59eb8a03f804972a52759d07b5e456a93ee87e4619d4b
 
 RUN Invoke-WebRequest $Env:DOTNET_DOWNLOAD_URL -OutFile WindowsHosting.exe; `
     if ((Get-FileHash WindowsHosting.exe -Algorithm sha512).Hash -ne $Env:DOTNET_DOWNLOAD_SHA) { `
