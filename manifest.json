@@ -6,7 +6,7 @@
             "images": [
                 {
                     "sharedTags": {
-                        "2.1.19-hosting": {},
+                        "2.1.22-hosting": {},
                         "2.1-hosting": {}
                     },
                     "platforms": [
@@ -15,7 +15,7 @@
                             "os": "windows",
 							"osVersion": "ltsc2016",
                             "tags": {
-                                "4.8-2.1.19-windowsservercore-ltsc2016": {},
+                                "4.8-2.1.22-windowsservercore-ltsc2016": {},
                                 "4.8-2.1-windowsservercore-ltsc2016": {}
                             }
                         },
@@ -24,7 +24,7 @@
                             "os": "windows",
 							"osVersion": "1803",
                             "tags": {
-                                "4.8-2.1.19-windowsservercore-1803": {},
+                                "4.8-2.1.22-windowsservercore-1803": {},
                                 "4.8-2.1-windowsservercore-1803": {}
                             }
                         },
@@ -33,7 +33,7 @@
                             "os": "windows",
 							"osVersion": "ltsc2019",
                             "tags": {
-                                "4.8-2.1.19-windowsservercore-ltsc2019": {},
+                                "4.8-2.1.22-windowsservercore-ltsc2019": {},
                                 "4.8-2.1-windowsservercore-ltsc2019": {}
                             }
                         },
@@ -42,7 +42,7 @@
                             "os": "windows",
 							"osVersion": "1903",
                             "tags": {
-                                "4.8-2.1.19-windowsservercore-1903": {},
+                                "4.8-2.1.22-windowsservercore-1903": {},
                                 "4.8-2.1-windowsservercore-1903": {}
                             }
                         }
